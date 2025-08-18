@@ -54,13 +54,13 @@ tbl_summary(
   by = sex_cat,
   include = c(
     sex_cat, race_eth_cat,
-    eyesight_cat, glasses, age_bir
+    eyesight_cat, glasses, age_bir, region_cat
   ),
   label = list(
     race_eth_cat ~ "Race/ethnicity",
     eyesight_cat ~ "Eyesight",
     glasses ~ "Wears glasses",
-    age_bir ~ "Age at first birth"
+    age_bir ~ "Age at first birth", region_cat ~ "Region"
   ),
   missing_text = "Missing"
 ) |>
@@ -77,4 +77,50 @@ tbl_summary(
   # replace the column headers and make them bold
   modify_header(label = "**Variable**", p.value = "**P**")
 
+
+##############################################################333
+
+
+# add p-values, a total column, bold labels, and remove the footnote
+tbl_summary(
+	nlsy,
+	by = sex_cat,
+	include = c(
+		starts_with("sleep"),
+		race_eth_cat,
+		region_cat,
+		income
+	),
+	label = list(
+		race_eth_cat ~ "Race/ethnicity",
+		region_cat ~ "Region",
+		income ~ "Income",
+		sleep_wkdy ~ "Sleeps on Weekday",
+		sleep_wknd ~ "Sleeps on weekend"
+	),
+	missing_text = "Missing",
+
+	statistic = list(income ~ "10% = {p10}; 90% = {p90}",
+									 sleep_wkdy ~ "min = {min}; max = {max}",
+									 sleep_wknd ~ "min = {min}; max = {max}"
+									 ),
+
+	digits = list(income ~ c(3, 3),
+								sleep_wkdy ~ c(1,1),
+								sleep_wknd ~ c(1,1)
+								)
+	)|>
+
+	# change the test used to compare sex_cat groups
+	add_p(test = list(
+		all_continuous() ~ "t.test",
+		all_categorical() ~ "chisq.test"
+	)) |>
+	# add a total column with the number of observations
+	add_overall(col_label = "**Total** N = {N}") |>
+	bold_labels() |>
+	# remove the default footnotes
+	modify_footnote(update = everything() ~ NA) |>
+	# replace the column headers and make them bold
+	modify_header(label = "**Variable**", p.value = "**P**")
 
