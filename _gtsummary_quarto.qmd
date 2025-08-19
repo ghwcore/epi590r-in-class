@@ -4,7 +4,7 @@ execute:
   warning: false
 format:
   html:
-    theme: journal
+    theme: zephyr
 echo: false
 ---
 
@@ -76,8 +76,40 @@ tbl_summary(
               eyesight_cat, glasses, age_bir)) |>
   	as_kable()
   
+totalsamples <- nrow(nlsy)
 ```
 
-@tbl-1 : this is modified by a as_kable pipe. This is actually the 'r 2+2' table in the documents.
+@tbl-1 : this is modified by a as_kable pipe. This is actually the `r 2+2` table in the documents.
 
-This did not work. Will this work: 'r nrow(nlsy)'
+This did not work. Will this work: First, `r nrow(nlsy)` and second, will this `r totalsamples` . Hope so.
+
+```{r}
+ds <- list(n = nrow(nlsy), 
+					 mean_age = mean(nlsy$age_bir, na.rm = TRUE)
+					 )
+```
+
+The data should give me `r ds$n` and mean age of `r ds$mean_age`.
+
+**Next section, Inline text function**
+
+```{r}
+#| label: tbl-descr
+#| tbl-cap: "Descriptive statistics"
+#| output-location: slide
+table1 <- tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir, sleep_wknd)) |> 
+  add_overall(last = TRUE)
+table1
+```
+
+Next is the code for the inline table.
+
+```{r}
+sleepnd <- inline_text(table1, variable = "sleep_wknd", column = "stat_1")
+```
+
+This shows the data for the inline test in the following `r sleepnd`.
