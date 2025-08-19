@@ -25,7 +25,11 @@ nlsy <- read_csv(here::here("data", "raw", "nlsy.csv"),
          glasses_cat = factor(glasses, labels = c("No", "Yes"))) 
 ```
 
+
+
 # Customization of `tbl_summary()`
+
+
 
 ```{r}
 tbl_summary(
@@ -51,9 +55,13 @@ tbl_summary(
   missing_text = "Missing")
 ```
 
+
+
 Exercise 2.2 Part 2
 
 Adding code below.
+
+
 
 ```{r}
 #| eval: false 
@@ -64,7 +72,11 @@ tbl_summary(
               eyesight_cat, glasses, age_bir))
 ```
 
+
+
 This is the corrected document.
+
+
 
 ```{r}
 #| label: tbl-1
@@ -79,9 +91,13 @@ tbl_summary(
 totalsamples <- nrow(nlsy)
 ```
 
+
+
 @tbl-1 : this is modified by a as_kable pipe. This is actually the `r 2+2` table in the documents.
 
 This did not work. Will this work: First, `r nrow(nlsy)` and second, will this `r totalsamples` . Hope so.
+
+
 
 ```{r}
 ds <- list(n = nrow(nlsy), 
@@ -89,9 +105,13 @@ ds <- list(n = nrow(nlsy),
 					 )
 ```
 
+
+
 The data should give me `r ds$n` and mean age of `r ds$mean_age`.
 
 **Next section, Inline text function**
+
+
 
 ```{r}
 #| label: tbl-descr
@@ -106,15 +126,23 @@ table1 <- tbl_summary(
 table1
 ```
 
+
+
 Next is the code for the inline table.
+
+
 
 ```{r}
 sleepnd <- inline_text(table1, variable = "sleep_wknd", column = "stat_1")
 ```
 
+
+
 This shows the data for the inline test in the following `r sleepnd`.
 
 ATTEMPT LINEAR REGRESSION AND INLINE TEXT
+
+
 
 ```{r}
   income_table <- tbl_uvregression(
@@ -129,11 +157,15 @@ ATTEMPT LINEAR REGRESSION AND INLINE TEXT
  income_table
 ```
 
+
+
 Here is the attempt: `r inline_text(income_table, variable = "age_bir")`
 
 FUNCTION
 
 Structure of a function.
+
+
 
 ```{r}
 
@@ -152,7 +184,11 @@ new_mean(y)
 
 ```
 
+
+
 DEVELOP FUNCTION TO SQUARE A NUMBER
+
+
 
 ```{r}
 
@@ -169,7 +205,11 @@ square(x)
 
 ```
 
+
+
 Attempt to concatenate.
+
+
 
 ```{r}
 concat <- function(s, t){
@@ -184,7 +224,11 @@ e <- "are you?"
  concat(d,e)
 ```
 
+
+
 CREATE FUNCTION TO ADD TWO NUMBERS
+
+
 
 ```{r}
 addit <- function(h,i){
@@ -207,7 +251,11 @@ num2 <- as.numeric(input2)
 addit(num1, num2)
 ```
 
+
+
 CREATE FUNCTION TO RAISE TO ANY POWER. USING DEFAULT VALUES.
+
+
 
 ```{r}
 
@@ -225,7 +273,11 @@ pwr(lol, lmao)
 
 ```
 
+
+
 CREATE A FUNCTION TO CALCULATE STDEV. USE IF STATEMENT.
+
+
 
 ```{r}
 
@@ -296,3 +348,4 @@ prmt <- function(){
 prmt()
 
 ```
+
