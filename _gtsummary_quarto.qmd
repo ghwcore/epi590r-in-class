@@ -4,7 +4,8 @@ execute:
   warning: false
 format:
   html:
-    theme: yeti
+    theme: journal
+echo: false
 ---
 
 ```{r}
@@ -49,3 +50,34 @@ tbl_summary(
   ),
   missing_text = "Missing")
 ```
+
+Exercise 2.2 Part 2
+
+Adding code below.
+
+```{r}
+#| eval: false 
+tbl_summary(
+  NLSY,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir))
+```
+
+This is the corrected document.
+
+```{r}
+#| label: tbl-1
+#| tbl-cap: "as_kable() table modified"
+tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir)) |>
+  	as_kable()
+  
+```
+
+@tbl-1 : this is modified by a as_kable pipe. This is actually the 'r 2+2' table in the documents.
+
+This did not work. Will this work: 'r nrow(nlsy)'
