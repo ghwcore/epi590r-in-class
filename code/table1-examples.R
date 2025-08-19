@@ -124,3 +124,5 @@ tbl_summary(
 	# replace the column headers and make them bold
 	modify_header(label = "**Variable**", p.value = "**P**")
 
+
+view(nlsy)

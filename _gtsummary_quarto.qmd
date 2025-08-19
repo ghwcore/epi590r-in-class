@@ -130,3 +130,79 @@ ATTEMPT LINEAR REGRESSION AND INLINE TEXT
 ```
 
 Here is the attempt: `r inline_text(income_table, variable = "age_bir")`
+
+FUNCTION
+
+Structure of a function.
+
+```{r}
+
+#given vector x
+y <- c(1,3,5,7,9)
+
+#new mean function
+new_mean <- function(x) {
+												n <- length(x)
+												new_val <- sum(x)/n
+												
+												return(new_val)
+	
+}
+new_mean(y)
+
+```
+
+DEVELOP FUNCTION TO SQUARE A NUMBER
+
+```{r}
+
+square <- function(n){
+											new_n <- n^2
+											return(new_n)
+								
+}
+
+x <- 8
+
+square(x)
+
+
+```
+
+Attempt to concatenate.
+
+```{r}
+concat <- function(s, t){
+												u <- paste(s,t)
+												
+												return(u)
+}
+
+d <- "How"
+e <- "are you?"
+
+ concat(d,e)
+```
+
+CREATE FUNCTION TO ADD TWO NUMBERS
+
+```{r}
+addit <- function(h,i){
+											j <- h + i
+											return(j)
+}
+
+m <- 6
+n <- 4
+
+addit(m,n)
+
+#Play around with input
+input1 <- readline(prompt = "Input01: ")
+input2 <- readline(prompt = "Input02: ")
+
+num1 <- as.numeric(input1)
+num2 <- as.numeric(input2)
+
+addit(num1, num2)
+```
