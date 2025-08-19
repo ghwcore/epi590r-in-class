@@ -1,0 +1,77 @@
+---
+title: "Test Q Document"
+author: "Grey"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+**MY TEST RUN ON QUARTO**
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+
+# load and clean data
+nlsy_cols <- c(
+  "glasses", "eyesight", "sleep_wkdy", "sleep_wknd",
+  "id", "nsibs", "samp", "race_eth", "sex", "region",
+  "income", "res_1980", "res_2002", "age_bir"
+)
+nlsy <- read_csv(here::here("data", "raw", "nlsy.csv"),
+  na = c("-1", "-2", "-3", "-4", "-5", "-998"),
+  skip = 1, col_names = nlsy_cols
+) |>
+  mutate(
+    region_cat = factor(region, labels = c("Northeast", "North Central", "South", "West")),
+    sex_cat = factor(sex, labels = c("Male", "Female")),
+    race_eth_cat = factor(race_eth, labels = c("Hispanic", "Black", "Non-Black, Non-Hispanic")),
+    eyesight_cat = factor(eyesight, labels = c("Excellent", "Very good", "Good", "Fair", "Poor")),
+    glasses_cat = factor(glasses, labels = c("No", "Yes"))
+  )
+
+logistic_model_p <- glm(nsibs ~ eyesight_cat + sex_cat + income,
+											data = nlsy, family = poisson()
+)
+
+tbl_regression(
+	logistic_model_p,
+	exponentiate = TRUE,
+	label = list(
+
+		 eyesight_cat ~ "Eyesight",
+		 sex_cat ~ "Sex",
+		income ~ "Income"
+	)
+)
+```
+
+ANOTHER TEST DOCUMENT
+
+```{r}
+
+x <- 4
+x
+y <- 9
+y
+```
