@@ -113,3 +113,20 @@ sleepnd <- inline_text(table1, variable = "sleep_wknd", column = "stat_1")
 ```
 
 This shows the data for the inline test in the following `r sleepnd`.
+
+ATTEMPT LINEAR REGRESSION AND INLINE TEXT
+
+```{r}
+  income_table <- tbl_uvregression(
+  	nlsy,
+  y = income,
+  include = c(
+    sex_cat, race_eth_cat,
+    eyesight_cat, income, age_bir
+  ),
+  method = lm
+)
+ income_table
+```
+
+Here is the attempt: `r inline_text(income_table, variable = "age_bir")`
